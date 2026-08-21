@@ -1,0 +1,83 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() &&
+        (request.auth.uid == 'fv5jT4NLFuYZKrPHkLX7sSzfi983' ||
+         request.auth.token.email == 'admin@growthrealtors.com' ||
+         request.auth.token.email == 'hussain2320067@gmail.com' ||
+         request.auth.token.role == 'admin' ||
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin');
+    }
+
+    // Users collection
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && request.auth.uid == userId;
+      allow update: if isOwner(userId) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // Properties collection
+    match /properties/{propertyId} {
+      allow read: if true;
+      allow create, update, delete: if true; // Allows demo administrative operations and seeding
+    }
+
+    // Agents collection
+    match /agents/{agentId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Inquiries collection
+    match /inquiries/{inquiryId} {
+      allow read: if true;
+      allow create: if true;
+      allow update, delete: if true;
+    }
+
+    // Viewing Requests collection
+    match /viewingRequests/{viewingId} {
+      allow read: if true;
+      allow create: if true;
+      allow update, delete: if true;
+    }
+
+    // Property Submissions (Sell/Rent by Owner)
+    match /propertySubmissions/{submissionId} {
+      allow read: if true;
+      allow create: if true;
+      allow update, delete: if true;
+    }
+
+    // Contact Messages
+    match /contactMessages/{messageId} {
+      allow read: if true;
+      allow create: if true;
+      allow update, delete: if true;
+    }
+
+    // Blog Posts
+    match /blogPosts/{postId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Testimonials
+    match /testimonials/{testimonialId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+  }
+}

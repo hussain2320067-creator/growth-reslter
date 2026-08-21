@@ -1,0 +1,253 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User account and profile details in Growth Realtors",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "user"] },
+        "avatar": { "type": "string" },
+        "favorites": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["email", "name", "role"]
+    },
+    "Property": {
+      "title": "Property",
+      "description": "Real estate property listing",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "slug": { "type": "string" },
+        "description": { "type": "string" },
+        "price": { "type": "number" },
+        "currency": { "type": "string" },
+        "city": { "type": "string" },
+        "location": { "type": "string" },
+        "address": { "type": "string" },
+        "propertyType": { "type": "string" },
+        "listingType": { "type": "string", "enum": ["Buy", "Rent"] },
+        "bedrooms": { "type": "number" },
+        "bathrooms": { "type": "number" },
+        "area": { "type": "number" },
+        "areaUnit": { "type": "string" },
+        "isFeatured": { "type": "boolean" },
+        "featuredImage": { "type": "string" },
+        "images": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "amenities": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "agentId": { "type": "string" },
+        "agentName": { "type": "string" },
+        "agentPhone": { "type": "string" },
+        "agentEmail": { "type": "string" },
+        "status": { "type": "string", "enum": ["Available", "Pending", "Sold", "Rented"] },
+        "viewsCount": { "type": "number" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["title", "slug", "price", "city", "location", "propertyType", "listingType"]
+    },
+    "Agent": {
+      "title": "Agent",
+      "description": "Real estate agent profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "role": { "type": "string" },
+        "experience": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "location": { "type": "string" },
+        "photo": { "type": "string" },
+        "specialties": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "activeListingsCount": { "type": "number" },
+        "soldPropertiesCount": { "type": "number" },
+        "rating": { "type": "number" },
+        "reviewsCount": { "type": "number" },
+        "bio": { "type": "string" }
+      },
+      "required": ["name", "role", "email", "phone"]
+    },
+    "Inquiry": {
+      "title": "Inquiry",
+      "description": "Client inquiry regarding a property",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "propertyId": { "type": "string" },
+        "propertyTitle": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "message": { "type": "string" },
+        "status": { "type": "string", "enum": ["Pending", "Contacted", "Closed"] },
+        "adminNotes": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["propertyId", "name", "email", "phone", "message"]
+    },
+    "ViewingRequest": {
+      "title": "ViewingRequest",
+      "description": "Physical or virtual viewing schedule request",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "propertyId": { "type": "string" },
+        "propertyTitle": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "message": { "type": "string" },
+        "status": { "type": "string", "enum": ["Pending", "Approved", "Completed", "Cancelled"] },
+        "adminNotes": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["propertyId", "name", "email", "phone", "date", "time"]
+    },
+    "PropertySubmission": {
+      "title": "PropertySubmission",
+      "description": "Property submission by a user/owner to sell or rent",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "ownerName": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "propertyAddress": { "type": "string" },
+        "city": { "type": "string" },
+        "propertyType": { "type": "string" },
+        "listingType": { "type": "string" },
+        "askingPrice": { "type": "number" },
+        "area": { "type": "number" },
+        "areaUnit": { "type": "string" },
+        "bedrooms": { "type": "number" },
+        "bathrooms": { "type": "number" },
+        "description": { "type": "string" },
+        "images": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "status": { "type": "string", "enum": ["Pending", "Reviewing", "Approved", "Rejected"] },
+        "adminNotes": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["ownerName", "email", "phone", "propertyAddress", "city", "askingPrice"]
+    },
+    "ContactMessage": {
+      "title": "ContactMessage",
+      "description": "General contact form inquiry",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "subject": { "type": "string" },
+        "message": { "type": "string" },
+        "status": { "type": "string", "enum": ["Unread", "Read", "Replied"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["name", "email", "message"]
+    },
+    "BlogPost": {
+      "title": "BlogPost",
+      "description": "Market update or luxury real estate article",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "slug": { "type": "string" },
+        "excerpt": { "type": "string" },
+        "content": { "type": "string" },
+        "coverImage": { "type": "string" },
+        "author": { "type": "string" },
+        "authorRole": { "type": "string" },
+        "category": { "type": "string" },
+        "readTime": { "type": "string" },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["title", "slug", "content", "category"]
+    },
+    "Testimonial": {
+      "title": "Testimonial",
+      "description": "Client testimonial review",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "clientName": { "type": "string" },
+        "clientRole": { "type": "string" },
+        "clientCity": { "type": "string" },
+        "quote": { "type": "string" },
+        "rating": { "type": "number" },
+        "propertyPurchased": { "type": "string" },
+        "avatar": { "type": "string" }
+      },
+      "required": ["clientName", "quote", "rating"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profiles with role-based access"
+    },
+    "/properties/{propertyId}": {
+      "schema": "Property",
+      "description": "Property listings"
+    },
+    "/agents/{agentId}": {
+      "schema": "Agent",
+      "description": "Real estate agents"
+    },
+    "/inquiries/{inquiryId}": {
+      "schema": "Inquiry",
+      "description": "Customer property inquiries"
+    },
+    "/viewingRequests/{viewingId}": {
+      "schema": "ViewingRequest",
+      "description": "Walkthrough and viewing appointments"
+    },
+    "/propertySubmissions/{submissionId}": {
+      "schema": "PropertySubmission",
+      "description": "Seller submissions"
+    },
+    "/contactMessages/{messageId}": {
+      "schema": "ContactMessage",
+      "description": "Inbound contact messages"
+    },
+    "/blogPosts/{postId}": {
+      "schema": "BlogPost",
+      "description": "Editorial blogs and insights"
+    },
+    "/testimonials/{testimonialId}": {
+      "schema": "Testimonial",
+      "description": "Client testimonials"
+    }
+  }
+}

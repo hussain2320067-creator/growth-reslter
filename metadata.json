@@ -1,0 +1,6 @@
+{
+  "name": "Growth Realtors",
+  "description": "Premium full-stack real estate platform for buying, renting, and selling luxury properties with advanced search, interactive inquiries, viewing requests, agent profiles, and a complete admin management system.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
